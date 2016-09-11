@@ -136,7 +136,7 @@ class Collector(object):
 
         # Who-Tests-What is just a hack at the moment, so turn it on with an
         # environment variable.
-        self.wtw = int(os.getenv('COVERAGE_WTW', 0))
+        self.wtw = 1
 
         self.reset()
 
