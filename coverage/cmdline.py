@@ -621,10 +621,10 @@ class CoverageScript(object):
         code_ran = True
         try:
             if options.module:
-                self.run_python_module(args[0], args)
+                self.run_python_module(args[0], args, coverage=self.coverage)
             else:
                 filename = args[0]
-                self.run_python_file(filename, args)
+                self.run_python_file(filename, args, coverage=self.coverage)
         except NoSource:
             code_ran = False
             raise

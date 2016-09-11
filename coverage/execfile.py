@@ -98,7 +98,7 @@ else:
         return pathname, packagename
 
 
-def run_python_module(modulename, args):
+def run_python_module(modulename, args, coverage=None):
     """Run a Python module, as though with ``python -m name args...``.
 
     `modulename` is the name of the module, possibly a dot-separated name.
@@ -110,10 +110,10 @@ def run_python_module(modulename, args):
 
     pathname = os.path.abspath(pathname)
     args[0] = pathname
-    run_python_file(pathname, args, package=packagename, modulename=modulename, path0="")
+    run_python_file(pathname, args, package=packagename, modulename=modulename, path0="", coverage=coverage)
 
 
-def run_python_file(filename, args, package=None, modulename=None, path0=None):
+def run_python_file(filename, args, package=None, modulename=None, path0=None, coverage=None):
     """Run a Python file as if it were the main program on the command line.
 
     `filename` is the path to the file to execute, it need not be a .py file.
@@ -141,6 +141,7 @@ def run_python_file(filename, args, package=None, modulename=None, path0=None):
         main_mod.__loader__ = DummyLoader(modulename)
 
     main_mod.__builtins__ = BUILTINS
+    main_mod.__builtins__.coverage = coverage
 
     # Set sys.argv properly.
     old_argv = sys.argv

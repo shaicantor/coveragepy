@@ -362,11 +362,4 @@ class Collector(object):
             covdata.add_lines(abs_file_dict(self.data))
         covdata.add_file_tracers(abs_file_dict(self.file_tracers))
 
-        if self.wtw:
-            # Just a hack, so just hack it.
-            import pprint
-            out_file = "coverage_wtw_{:06}.py".format(os.getpid())
-            with open(out_file, "w") as wtw_out:
-                pprint.pprint(self.contexts, wtw_out)
-
         self.reset()
